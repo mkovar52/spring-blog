@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>Show</title>
+</head>
+<body>
+
+<!-- loop through and show only specific post with match userId-->
+<h1 th:text="${'post with the id of: ' + id + ' will be shown here'}"></h1>
+
+<div>
+    <h3 th:text="${'title: ' + postTitle}"></h3>
+    <h5 th:text="${'body: ' + postBody}"></h5>
+</div>
+
+
+</body>
+</html>
