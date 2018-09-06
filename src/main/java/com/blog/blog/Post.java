@@ -12,7 +12,7 @@ public class Post {
     private String userEmail;
     private String userDateOfBirth;
     private int userAge;
-    private long userIdNum;
+    private long postId;
 
     public String title;
     public String body;
@@ -21,10 +21,10 @@ public class Post {
 
     }
 
-    public Post(String title, String body, long userIdNum){
+    public Post(String title, String body, long postId){
         this.title = title;
         this.body = body;
-        this.userIdNum = userIdNum;
+        this.postId = postId;
     }
 
 

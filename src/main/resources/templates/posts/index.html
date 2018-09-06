@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
+<head th:replace="fragments/header :: header">
     <meta charset="UTF-8" />
     <title>Index</title>
 </head>
-<body>
+<body class="container">
 <!--loop through and show all posts -->
     <h1>all posts shown here</h1>
-    <div th:each="post : ${listOfPosts}">
-        <h3 th:text="'title: ' + ${post.title}"></h3>
-        <h5 th:text="'body: ' + ${post.body}"></h5>
+
+    <div class="container">
+        <div class="row" th:each="post : ${posts}">
+            <div class="col-12">
+                <br/>
+                <h3 th:text="'title: ' + ${post.title}"></h3>
+                <p class="lead" th:text="'body: ' + ${post.body}"></p>
+            </div>
+        </div>
     </div>
 
 </body>
