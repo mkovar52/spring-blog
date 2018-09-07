@@ -14,9 +14,10 @@ public class Post {
     private int userAge;
     private long postId;
 
-    public String title;
-    public String body;
+    private String title;
+    private String body;
 
+    // ===== constructors ===== \\
     public Post(){
 
     }
@@ -26,7 +27,6 @@ public class Post {
         this.body = body;
         this.postId = postId;
     }
-
 
 
     public Post(String userEmail, String userDateOfBirth, int userAge) {
@@ -40,6 +40,7 @@ public class Post {
         this.body = body;
     }
 
+    // ===== Getters & Setters ===== \\
     public String getUserEmail() {
         return userEmail;
     }
@@ -78,5 +79,13 @@ public class Post {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public long getPostId() {
+        return postId;
+    }
+
+    public void setPostId(long postId) {
+        this.postId = postId;
     }
 }

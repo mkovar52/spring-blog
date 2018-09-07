@@ -2,24 +2,18 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/header :: header">
     <meta charset="UTF-8" />
-    <title>Show</title>
+    <title>Show Post</title>
 </head>
 <body class="container">
 
-<!-- loop through and show only specific post with match userId-->
-    <h1 th:text="${'post with the id of: ' + id + ' will be shown here'}"></h1>
+    <h1 th:text="${'post with the id of: ' + postId + ' will be shown here'}"></h1>
 
     <div class="row">
         <div class="col-12">
-            <h3 th:text="${'title: ' + post.title}"></h3>
-            <p class="lead" th:text="${'body: ' + post.body}"></p>
+            <h3 th:text="'Title: ' + ${post.title}"></h3>
+            <p class="lead" th:text="'body: ' + ${post.body}"></p>
         </div>
     </div>
-
-    <!--<div class="row" th:if="${post.postId == id}">-->
-        <!--<h3 th:text="post.title"></h3>-->
-        <!--<p class="lead" th:text="post.body"></p>-->
-    <!--</div>-->
 
 </body>
 </html>
