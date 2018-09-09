@@ -40,30 +40,28 @@ public class PostController {
     }
 
 
-//    @GetMapping("/posts/create")
-//    public String createNewPost(){
-//        return "/posts/create";
-//    }
-
-
-
     @GetMapping("/posts/create")
     public String showCreateForm(){
         return "/posts/create";
     }
 
-    @PostMapping("posts/save")
-    public String createPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
+//    @PostMapping("posts/save")
+//    public String createPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
+//
+//        Post post = postsSvc.save(new Post(title, body));
+//
+//        return "redirect:/posts";
+//    }
 
-        Post post = postsSvc.save(new Post(title, body));
-
+    //re-worked version from above
+    @PostMapping("/posts/save")
+    public String createPost(@ModelAttribute Post post){
+        postsSvc.save(post);
         return "redirect:/posts";
     }
 
     @GetMapping("/posts/{postId}/edit")
     public String editPost(@PathVariable long postId, Model viewModel){
-
-//        Post post = postsSvc.findOne(postId);
         viewModel.addAttribute("post", postsSvc.findOne(postId));
 
         return "/posts/edit";
