@@ -12,15 +12,23 @@
         <div class="row" th:each="post : ${posts}">
             <div class="col-12">
                 <br/>
-                <h3 th:text="'title: ' + ${post.title}"></h3>
-                <p class="lead" th:text="'body: ' + ${post.body}"></p>
+                <div class="card w-50">
+                    <div class="card-body">
+                        <h3 th:text="'title: ' + ${post.title}"></h3>
+                        <p class="lead" th:text="'body: ' + ${post.body}"></p>
+                        <p class="lead font-italic" th:text="'posted by:' + ${post.userEmail}"></p>
+                        <!--<button class="btn btn-dark">view comment</button>-->
+                        <button type="button" class="btn btn-primary">
+                            <!--(need another column in table to count comments)-->
+                            view comments <span class="badge badge-light">2</span>
+                        </button>
 
-                <form th:action="@{posts/delete}" method="POST">
-                    <!--<button class="btn btn-danger" th:text="'delete id: ' + ${post.postId}">DELETE</button>-->
-                    <input type="hidden" name="id" th:value="${post.postId}" />
-                    <button class="btn btn-danger">DELETE</button>
-                </form>
-
+                        <form th:action="@{posts/delete}" method="POST">
+                            <input type="hidden" name="id" th:value="${post.postId}" />
+                            <button class="btn btn-danger">DELETE</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

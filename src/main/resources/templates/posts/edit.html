@@ -5,13 +5,25 @@
     <title>Create Page</title>
 </head>
 <body class="container">
-    <h1>Create A Post</h1>
-        <form action="@{/posts/${postId}/edit}" method="POST">
+
+    <h1>Edit Post</h1>
+        <!--edit post -->
+        <form th:action="@{/posts/${postId}/edit}" th:method="POST" th:object="${post}">
             <label for="title">Title</label>
-            <input id="title" type="text" th:field="*{post.title}" />
+            <input id="title" type="text" th:field="*{title}" />
             <label for="body">Body</label>
-            <input id="body" type="text" th:field="*{post.body}" />
-            <button class="btn btn-dark">Submit Edit</button>
+            <input type="hidden" th:field="*{postId}" />
+            <input type="hidden" th:field="*{userEmail}" />
+            <input id="body" type="text" th:field="*{body}" />
+            <br/>
+            <button class="btn btn-success">Submit</button>
         </form>
+
+        <!--delete form-->
+        <form th:action="@{/posts/delete}" th:method="POST" th:object="${post}">
+            <input type="hidden" name="id" th:value="${post.postId}" />
+            <button class="btn btn-danger">Delete Post</button>
+        </form>
+
 </body>
 </html>

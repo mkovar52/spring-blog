@@ -7,20 +7,18 @@
 <body class="container">
 <!--loop through and show all posts -->
 <h1>Create A Post</h1>
+    <form action="/posts/save" method="POST">
+        <label for="title">Title</label>
+        <input id="title" type="text" name="title" />
 
-<form action="/posts/save" method="POST">
-    <label for="title">Title</label>
-    <input id="title" type="text" name="title" />
+        <label for="body">Body</label>
+        <input id="body" type="text" name="body" />
 
-    <label for="body">Body</label>
-    <input id="body" type="text" name="body" />
+        <label for="userEmail">Email:</label>
+        <input id="userEmail" type="text" name="userEmail" />
 
-    <!--<label for="email">Email:</label>-->
-    <!--<input id="email" type="text" name="email" />-->
-
-    <button class="btn btn-dark">Submit</button>
-</form>
-
+        <button class="btn btn-dark">Submit</button>
+    </form>
 <div class="container">
 
 

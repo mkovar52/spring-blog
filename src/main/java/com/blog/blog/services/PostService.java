@@ -12,6 +12,8 @@ import java.util.List;
 @Service
 public class PostService {
 
+    // ================ my solutions to exercise
+
     private final PostRepository postDao;
 
     public PostService(PostRepository postDao){

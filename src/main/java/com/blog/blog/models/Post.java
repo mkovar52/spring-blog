@@ -22,8 +22,8 @@ public class Post {
     @Column(nullable = false)
     private String body;
 
-//    @Column(nullable = false)
-//    private String userEmail;
+    @Column(nullable = false)
+    private String userEmail;
 
 
     // ===== constructors ===== \\
@@ -35,6 +35,19 @@ public class Post {
         this.title = title;
         this.body = body;
         this.postId = postId;
+    }
+
+    public Post(String title, String body, long postId, String userEmail){
+        this.title = title;
+        this.body = body;
+        this.postId = postId;
+        this.userEmail = userEmail;
+    }
+
+    public Post(String title, String body, String userEmail){
+        this.title = title;
+        this.body = body;
+        this.userEmail = userEmail;
     }
 
     public Post(long postId){
@@ -51,9 +64,8 @@ public class Post {
 
     @Override
     public String toString(){
-        return String.format("ID: %d, TITLE: %s, BODY: %s", postId, title, body);
+        return String.format("ID: %d, TITLE: %s, BODY: %s, POSTED BY: %s", postId, title, body, userEmail);
     }
-
 
     public String getTitle() {
         return title;
@@ -78,4 +90,8 @@ public class Post {
     public void setPostId(long postId) {
         this.postId = postId;
     }
+
+    public String getUserEmail(){ return userEmail; }
+
+    public void setUserEmail(String userEmail){this.userEmail = userEmail;}
 }

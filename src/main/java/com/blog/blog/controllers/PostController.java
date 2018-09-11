@@ -1,6 +1,7 @@
 package com.blog.blog.controllers;
 
 import com.blog.blog.models.Post;
+import com.blog.blog.repositories.PostRepository;
 import com.blog.blog.services.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ public class PostController {
 
     // ensures no one overrides this
     private final PostService postsSvc;
+
 
     //default constructor (added posts service to params
     // dependency injection
@@ -35,6 +37,7 @@ public class PostController {
         return "/posts/index";
     }
 
+    // =======
 //    @PostMapping("/posts/delete")
 //    public String deletePostFromRecords(@ModelAttribute Post post){
 //
@@ -48,6 +51,7 @@ public class PostController {
         return "/posts/create";
     }
 
+// ===== first version of passing form data from view to controller ===== \\
 //    @PostMapping("posts/save")
 //    public String createPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body, @RequestParam(name = "user_email") String userEmail) {
 //
@@ -56,7 +60,7 @@ public class PostController {
 //        return "redirect:/posts";
 //    }
 
-//// ===== re-worked version from above form binding ===== \\
+//// ===== re-worked version from above to incorporate form binding ===== \\
     @PostMapping("/posts/save")
     public String createPost(@ModelAttribute Post post){
         postsSvc.save(post);
@@ -69,6 +73,13 @@ public class PostController {
         viewModel.addAttribute("post", postsSvc.findOne(postId));
 
         return "posts/edit";
+    }
+
+    @PostMapping("/posts/{postId}/edit")
+    public String updatePost(@ModelAttribute Post post){
+
+        postsSvc.save(post);
+        return "redirect:/posts";
     }
 
     @PostMapping("/posts/delete")
