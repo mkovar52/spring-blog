@@ -1,13 +1,10 @@
 package com.blog.blog.controllers;
 
-import com.blog.blog.Post;
+import com.blog.blog.models.Post;
 import com.blog.blog.services.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class PostController {
@@ -31,14 +28,20 @@ public class PostController {
     }
 
 
-    @RequestMapping("/posts")
+    @GetMapping("/posts")
     public String index(Model vModel){
-
         vModel.addAttribute("posts", postsSvc.findAll());
 
         return "/posts/index";
     }
 
+//    @PostMapping("/posts/delete")
+//    public String deletePostFromRecords(@ModelAttribute Post post){
+//
+//        postsSvc.delete(post);
+//
+//        return "redirect:/posts";
+//    }
 
     @GetMapping("/posts/create")
     public String showCreateForm(){
@@ -46,17 +49,18 @@ public class PostController {
     }
 
 //    @PostMapping("posts/save")
-//    public String createPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
+//    public String createPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body, @RequestParam(name = "user_email") String userEmail) {
 //
-//        Post post = postsSvc.save(new Post(title, body));
-//
+//        Post post = postsSvc.save(new Post(body, title, userEmail));
+//        postsSvc.save(post);
 //        return "redirect:/posts";
 //    }
 
-    //re-worked version from above
+//// ===== re-worked version from above form binding ===== \\
     @PostMapping("/posts/save")
     public String createPost(@ModelAttribute Post post){
         postsSvc.save(post);
+
         return "redirect:/posts";
     }
 
@@ -64,10 +68,15 @@ public class PostController {
     public String editPost(@PathVariable long postId, Model viewModel){
         viewModel.addAttribute("post", postsSvc.findOne(postId));
 
-        return "/posts/edit";
+        return "posts/edit";
     }
 
+    @PostMapping("/posts/delete")
+    public String deletePostById(@RequestParam(name = "id") long id){
 
+        postsSvc.delete(id);
 
+        return "redirect:/posts";
+    }
 
 }

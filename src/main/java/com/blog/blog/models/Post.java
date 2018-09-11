@@ -1,4 +1,4 @@
-package com.blog.blog;
+package com.blog.blog.models;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -6,16 +6,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "posts")
 public class Post {
 
-    private String userEmail;
-    private String userDateOfBirth;
-    private int userAge;
+    @Id
+    @GeneratedValue
     private long postId;
 
+    @Column(nullable = false)
     private String title;
+
+    @Column(nullable = false)
     private String body;
+
+//    @Column(nullable = false)
+//    private String userEmail;
+
 
     // ===== constructors ===== \\
     public Post(){
@@ -28,42 +37,23 @@ public class Post {
         this.postId = postId;
     }
 
-
-    public Post(String userEmail, String userDateOfBirth, int userAge) {
-        this.userEmail = userEmail;
-        this.userDateOfBirth = userDateOfBirth;
-        this.userAge = userAge;
+    public Post(long postId){
+        this.postId = postId;
     }
+
 
     public Post(String title, String body){
         this.title = title;
         this.body = body;
     }
 
-    // ===== Getters & Setters ===== \\
-    public String getUserEmail() {
-        return userEmail;
+    // ===== Getters & Setters + Override toString method ===== \\
+
+    @Override
+    public String toString(){
+        return String.format("ID: %d, TITLE: %s, BODY: %s", postId, title, body);
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
-
-    public String getUserDateOfBirth() {
-        return userDateOfBirth;
-    }
-
-    public void setUserDateOfBirth(String userDateOfBirth) {
-        this.userDateOfBirth = userDateOfBirth;
-    }
-
-    public int getUserAge() {
-        return userAge;
-    }
-
-    public void setUserAge(int userAge) {
-        this.userAge = userAge;
-    }
 
     public String getTitle() {
         return title;

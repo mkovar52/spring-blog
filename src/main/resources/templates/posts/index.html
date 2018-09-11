@@ -14,7 +14,13 @@
                 <br/>
                 <h3 th:text="'title: ' + ${post.title}"></h3>
                 <p class="lead" th:text="'body: ' + ${post.body}"></p>
-                <button class="btn btn-primary">comment</button>
+
+                <form th:action="@{posts/delete}" method="POST">
+                    <!--<button class="btn btn-danger" th:text="'delete id: ' + ${post.postId}">DELETE</button>-->
+                    <input type="hidden" name="id" th:value="${post.postId}" />
+                    <button class="btn btn-danger">DELETE</button>
+                </form>
+
             </div>
         </div>
     </div>
