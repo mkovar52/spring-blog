@@ -8,11 +8,11 @@
 
     <h1>Edit Post</h1>
         <!--edit post -->
-        <form th:action="@{/posts/${postId}/edit}" th:method="POST" th:object="${post}">
+        <form th:action="@{/posts/${id}/edit}" th:method="POST" th:object="${post}">
             <label for="title">Title</label>
             <input id="title" type="text" th:field="*{title}" />
             <label for="body">Body</label>
-            <input type="hidden" th:field="*{postId}" />
+            <input type="hidden" th:field="*{id}" />
             <input type="hidden" th:field="*{userEmail}" />
             <input id="body" type="text" th:field="*{body}" />
             <br/>
@@ -21,7 +21,7 @@
 
         <!--delete form-->
         <form th:action="@{/posts/delete}" th:method="POST" th:object="${post}">
-            <input type="hidden" name="id" th:value="${post.postId}" />
+            <input type="hidden" name="id" th:value="${post.id}" />
             <button class="btn btn-danger">Delete Post</button>
         </form>
 

@@ -7,14 +7,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "posts")
-public class Post {
+public class Post implements Serializable {
 
     @Id
     @GeneratedValue
-    private long postId;
+    private long id;
 
     @Column(nullable = false)
     private String title;
@@ -22,49 +23,44 @@ public class Post {
     @Column(nullable = false)
     private String body;
 
-    @Column(nullable = false)
-    private String userEmail;
+
+    // ===== relationships ===== \\
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 
 
     // ===== constructors ===== \\
+
     public Post(){
 
     }
-
-    public Post(String title, String body, long postId){
-        this.title = title;
-        this.body = body;
-        this.postId = postId;
-    }
-
-    public Post(String title, String body, long postId, String userEmail){
-        this.title = title;
-        this.body = body;
-        this.postId = postId;
-        this.userEmail = userEmail;
-    }
-
-    public Post(String title, String body, String userEmail){
-        this.title = title;
-        this.body = body;
-        this.userEmail = userEmail;
-    }
-
-    public Post(long postId){
-        this.postId = postId;
-    }
-
 
     public Post(String title, String body){
         this.title = title;
         this.body = body;
     }
 
+    public Post(String title, String body, User user, long id) {
+        this.title = title;
+        this.body = body;
+        this.id = id;
+        this.user = user;
+    }
+
+    public Post(String title, String body, long id){
+        this.title = title;
+        this.body = body;
+        this.id = id;
+    }
+
     // ===== Getters & Setters + Override toString method ===== \\
 
     @Override
     public String toString(){
-        return String.format("ID: %d, TITLE: %s, BODY: %s, POSTED BY: %s", postId, title, body, userEmail);
+        return String.format("ID: %d, TITLE: %s, BODY: %s, POSTED BY: %s", id, title, body);
     }
 
     public String getTitle() {
@@ -83,15 +79,20 @@ public class Post {
         this.body = body;
     }
 
-    public long getPostId() {
-        return postId;
+    public long getId() {
+        return id;
     }
 
-    public void setPostId(long postId) {
-        this.postId = postId;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public String getUserEmail(){ return userEmail; }
+    public User getUser() {
+        return user;
+    }
 
-    public void setUserEmail(String userEmail){this.userEmail = userEmail;}
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }

@@ -5,6 +5,8 @@
     <title>Index</title>
 </head>
 <body class="container">
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+
 <!--loop through and show all posts -->
     <h1>all posts shown here</h1>
 
@@ -16,15 +18,14 @@
                     <div class="card-body">
                         <h3 th:text="'title: ' + ${post.title}"></h3>
                         <p class="lead" th:text="'body: ' + ${post.body}"></p>
-                        <p class="lead font-italic" th:text="'posted by:' + ${post.userEmail}"></p>
-                        <!--<button class="btn btn-dark">view comment</button>-->
+                        <p class="lead font-italic" th:text="'created by:' + ${post.user.email}"></p>
                         <button type="button" class="btn btn-primary">
                             <!--(need another column in table to count comments)-->
                             view comments <span class="badge badge-light">2</span>
                         </button>
 
                         <form th:action="@{posts/delete}" method="POST">
-                            <input type="hidden" name="id" th:value="${post.postId}" />
+                            <input type="hidden" name="id" th:value="${post.id}" />
                             <button class="btn btn-danger">DELETE</button>
                         </form>
                     </div>
@@ -33,5 +34,9 @@
         </div>
     </div>
 
+
+<footer th:replace="fragments/footer :: footer">
+
+</footer>
 </body>
 </html>
