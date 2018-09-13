@@ -18,6 +18,7 @@
                     <div class="card-body">
                         <h3 th:text="'title: ' + ${post.title}"></h3>
                         <p class="lead" th:text="'body: ' + ${post.body}"></p>
+                        <!--this was giving me a null value for user_id, but still allowed me to insert it-->
                         <p class="lead font-italic" th:text="'created by:' + ${post.user.email}"></p>
                         <button type="button" class="btn btn-primary">
                             <!--(need another column in table to count comments)-->

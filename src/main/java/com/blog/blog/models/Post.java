@@ -27,7 +27,7 @@ public class Post implements Serializable {
     // ===== relationships ===== \\
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+//    @JoinColumn(name = "user_id")
     private User user;
 
 

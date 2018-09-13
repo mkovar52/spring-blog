@@ -5,6 +5,7 @@ import com.blog.blog.models.User;
 import com.blog.blog.repositories.PostRepository;
 import com.blog.blog.repositories.UserRepo;
 import com.blog.blog.services.PostService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,16 +27,18 @@ public class PostController {
 
     // services ex. 9-7-18
     @GetMapping("/posts/{id}")
-    public String show(@PathVariable long id, Model viewModel){
+    public String show(@PathVariable long id, Model viewModel, User user){
         viewModel.addAttribute("post", postsSvc.findOne(id));
+        viewModel.addAttribute("user", userDao.findOne(user.getId()));
+
         return "/posts/show";
     }
 
 
     @GetMapping("/posts")
-    public String index(Model viewModel, @ModelAttribute User user){
+    public String index(Model viewModel, User user){
         viewModel.addAttribute("posts", postsSvc.findAll());
-        viewModel.addAttribute("user", user);
+        viewModel.addAttribute("user", userDao.findOne(user.getId()));
 
         return "/posts/index";
     }
@@ -48,7 +51,8 @@ public class PostController {
 //    }
 
     @GetMapping("/posts/create")
-    public String showCreateForm(){
+    public String showCreateForm(Model viewModel){
+        viewModel.addAttribute("post", new Post());
         return "/posts/create";
     }
 
@@ -63,8 +67,11 @@ public class PostController {
 
 //// ===== re-worked version from above to incorporate form binding ===== \\
     @PostMapping("/posts/save")
-    public String createPost(@ModelAttribute Post post){
-        post.setUser(userDao.findOne(3L));
+    public String insertPost(@ModelAttribute Post post){
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        post.setUser(userDao.findOne(user.getId()));
         postsSvc.save(post);
 
         return "redirect:/posts";
