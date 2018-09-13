@@ -88,4 +88,16 @@ public class PostController {
         return "redirect:/posts";
     }
 
+//    @GetMapping("/find-user/{username}")
+//    public String findUser(@PathVariable String username){
+//
+//        User user = userDao.findByUsername(username);
+//
+//        System.out.println("user.getEmail() = " + user.getUsername());
+//
+//        return "testing find username";
+//    }
+
+
+
 }
